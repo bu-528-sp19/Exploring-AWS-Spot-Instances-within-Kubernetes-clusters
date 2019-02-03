@@ -2,7 +2,7 @@
 ## **The goal of this project is to explore how we can use spot instances to reduce the cost of running kubernetes clusters.** 
 
 **Background** 
-- [Amazon EC2 Spot Instances](https://aws.amazon.com/ec2/spot/ "Amazon EC2 Spot Instances") offer spare compute capacity available in the AWS cloud at steep discounts compared to On-Demand instances. Spot Instances enable you to optimize your costs on the AWS cloud and scale your application's throughput up to 10X for the same budget.
+- [Amazon EC2 Spot Instances](https://aws.amazon.com/ec2/spot/ "Amazon EC2 Spot Instances") offer spare compute capacity available in the AWS cloud at steep discounts compared to On-Demand instances. Spot Instances enable you to optimize your costs on the AWS cloud and scale your application's throughput up to 10X for the same budget. The Spot price is determined by term trends in supply and demand and the amount of On-Demand capacity on a particular instance size, family, Availability Zone, and AWS Region
 - [Kubernetes](https://kubernetes.io/ "Kubernetes") is a portable, extensible open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
 
  ## **1. Vision and goals**
