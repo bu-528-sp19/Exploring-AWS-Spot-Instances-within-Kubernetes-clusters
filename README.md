@@ -19,10 +19,31 @@
 - Can handle sporadic or any distributed workloads.
 - Primarily focuses on scaling of EC2 instances.
 
-## **4. Solution**
+## **4. Input**
+- SLA by the client that difines the up time of the application and the percentage of the cluster to be used as spot instance.
+
+## **5. Output**
+- Cost Savings 
+- Recommended percentage of clusters to optimize cost savings and performance.
+
+## **6. Solution**
 - To create controller logic which will be continously looking for a better state.
   + The controller looks for available spot instances which are cheaper and are capable of processing the workload.
   + The controller always looks for a cheaper spot instance than the current spot instance while also considering time rquired for migration.
-    
 
-(A better state is when a controller finds a spot instance that is cheaper and provides the same computing power required and also time of migration is lesser than the processing time)
+## **7. Acceptance criteria**
+- Controller can handle a single application with a constant load with 10% of the clusters as spot instances to reduce the effective cost.
+
+**Stretch goals**
+- Dynamicaly scale the usage of spot instances.
+- Capable of handling various applications with sporadic workloads.
+
+## **8. Release planning**
+- Release #1: 
+ create a controller (in GoLang) is capable of calling the AWS SDK
+ 
+- Release #2: 
+Watch the AWS spot instance events to determine when a node is going away, figure out how to recover from such events with your Kubernetes cluster (Ex: evacuate the existing node and add a new node)
+
+- Release #3: Use an example application (JBoss, Spark, etc.), simulate load, and trigger spot instance events to move the application and maintain SLA
+ 
