@@ -19,6 +19,7 @@
 - Can handle sporadic or any distributed workloads.
 - Primarily focuses on scaling of EC2 instances.
 
+
 ## **4. Input**
 - SLA by the client that difines the up time of the application and the percentage of the cluster to be used as spot instance.
 
@@ -30,6 +31,10 @@
 - To create controller logic which will be continously looking for a better state.
   + The controller looks for available spot instances which are cheaper and are capable of processing the workload.
   + The controller always looks for a cheaper spot instance than the current spot instance while also considering time rquired for migration.
+
+### Proposed System
+![Proposed System](https://user-images.githubusercontent.com/20182350/52174269-67e5ca80-275f-11e9-95a4-4e592fee92cc.JPG)
+
 
 ## **7. Acceptance criteria**
 - Controller can handle a single application with a constant load with 10% of the clusters as spot instances to reduce the effective cost.
