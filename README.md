@@ -21,7 +21,7 @@
 
 
 ## **4. Input**
-- SLA by the client that difines the up time of the application and the percentage of the cluster to be used as spot instance.
+- SLA by the client that defines the up time of the application and the percentage of the cluster to be used as spot instance.
 
 ## **5. Output**
 - Cost Savings 
