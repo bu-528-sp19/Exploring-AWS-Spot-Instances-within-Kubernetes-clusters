@@ -6,7 +6,7 @@
 - [Kubernetes](https://kubernetes.io/ "Kubernetes") is a portable, extensible open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
 
  ## **1. Vision and goals**
- - To provide a cost effective way of running a Kubernetes cluster using spot instances which are economical than the default On-Demand instances
+ - To provide a cost-effective way of running a Kubernetes cluster using spot instances which are economical than the default On-Demand instances
  - To recommend the client an optimal percentage of total Kubernetes clusters to be used as spot instances to reduce the overall cost. 
  
  ## **2. Users**
@@ -28,9 +28,9 @@
 - Recommended percentage of clusters to optimize cost savings and performance.
 
 ## **6. Solution**
-- To create controller logic which will be continously looking for a better state.
-  + The controller looks for available spot instances which are cheaper and are capable of processing the workload.
-  + The controller always looks for a cheaper spot instance than the current spot instance while also considering time rquired for migration.
+- To create controller logic which will be continuously looking for a better state.
+  + The controller looks for available spot instances which are cheaper and can process the workload.
+  + The controller always looks for a cheaper spot instance than the current spot instance while also considering time required for migration.
 
 ### Proposed System
 ![Proposed System](https://user-images.githubusercontent.com/20182350/52174269-67e5ca80-275f-11e9-95a4-4e592fee92cc.JPG)
@@ -40,15 +40,14 @@
 - Controller can handle a single application with a constant load with 10% of the clusters as spot instances to reduce the effective cost.
 
 **Stretch goals**
-- Dynamicaly scale the usage of spot instances.
+- Dynamically scale the usage of spot instances.
 - Capable of handling various applications with sporadic workloads.
 
 ## **8. Release planning**
 - Release #1: 
- create a controller (in GoLang) is capable of calling the AWS SDK
+ create a controller (in GoLang) can call the AWS SDK
  
 - Release #2: 
 Watch the AWS spot instance events to determine when a node is going away, figure out how to recover from such events with your Kubernetes cluster (Ex: evacuate the existing node and add a new node)
 
 - Release #3: Use an example application (JBoss, Spark, etc.), simulate load, and trigger spot instance events to move the application and maintain SLA
- 
