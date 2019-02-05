@@ -1,4 +1,4 @@
-# Exploring-AWS-Spot-Instances-within-Kubernetes-clusters
+# Exploring AWS Spot Instances within Kubernetes clusters
 ## **The goal of this project is to explore how we can use spot instances to reduce the cost of running kubernetes clusters.** 
 
 **Background** 
