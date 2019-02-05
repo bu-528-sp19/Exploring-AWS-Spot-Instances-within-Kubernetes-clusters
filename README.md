@@ -12,7 +12,7 @@
  - Kubernetes has built-in logic for self-healing which makes it easier and ideal target for the development of such a solution
  
  ## **2. Users**
- - This will be used by Cluster Admins and Cluster Developers using the Kubernetes Cluster for various application or projects
+ - This will be used by cluster admins and developers using the Kubernetes Cluster and want to optimize their infrastructure cost for various applications or projects 
  - It does not target non-expert users who are unfamiliar with Kubernetes or AWS
  
 ## **3. Scope and features**
@@ -46,7 +46,7 @@
    + Looks at signals from Spot Instances and workloads on Kubernetes to decide when to transfer a load from On-Demand node to Spot Instance node
    + Can handle any type of workload distribution for a variety of applications
  - The program will never compromise the working of the application as defined by the SLA in order to reduce the costs. That is, it will not shift the load to a spot instance just for the sake of it.
- - The program will also calculate the cost savings that the client makes, and can suggest an optimum percentage of workload to maximize savings while running no risk of stepping out of line of the SLA
+ - The program will also calculate the cost savings that the client makes, and can suggest an optimum percentage of workload to be run on Spot Instances to maximize savings while running no risk of stepping out of line of the SLA
 
 ### Proposed System
 ![Proposed System](https://user-images.githubusercontent.com/20182350/52174269-67e5ca80-275f-11e9-95a4-4e592fee92cc.JPG)
