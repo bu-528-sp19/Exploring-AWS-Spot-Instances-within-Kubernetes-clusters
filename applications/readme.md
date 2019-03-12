@@ -9,7 +9,8 @@ Start Minikube
 
 Deploy the Sock Shop application on Minikube
 
-<pre> kubectl create namespace sock-shop
+<pre>cd deploy/kubernetes/
+kubectl create namespace sock-shop
 
 kubectl apply -f complete-demo.yaml </pre>
 
