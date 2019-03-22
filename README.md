@@ -43,7 +43,7 @@
    + Can dynamically handle any termination of node, either On-Demand or spot instance
    + Recovers from termination utilizing the cluster autoscaler component of Kubernetes to either evacuate and shift to a new On-demand node or decide to look for another available spot instance
    + May also look for a cheaper spot instance than the current spot instance and decides while considering time required for migration, in order to provide additional cost savings
-   + Looks at signals from Spot Instances and workloads on Kubernetes to decide when to transfer a load from On-Demand node to Spot Instance node
+   + Looks at signals(CPU Usage, Node CPU capacity, Memory usage, Node Memory capacity, Requests, Limits and pod health) from Spot Instances and workloads on Kubernetes to decide when to transfer a load from On-Demand node to Spot Instance node
    + Can handle any type of workload distribution for a variety of applications
  - The program will never compromise the working of the application as defined by the SLA in order to reduce the costs. That is, it will not shift the load to a spot instance just for the sake of it.
  - The program will also calculate the cost savings that the client makes, and can suggest an optimum percentage of workload to be run on Spot Instances to maximize savings while running no risk of stepping out of line of the SLA
