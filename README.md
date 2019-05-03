@@ -165,7 +165,8 @@ export KOPS_STATE_STORE=s3://<bucket-name>
 kops create cluster <cluster-name> --zones us-east-1a --yes --master-size=<machine-type> --node-size=<machine-type> --node-count=<count>
 ```
 **Note: ```<cluster-name>.k8s.local``` creates a cluster without DNS.**  
-Set the ```<machine-type>```  and ```<count>``` to the desired option.
+
+Set the ```<machine-type>```  and ```<count>``` to the desired option.  
 
 We set ```<machine-type> => t3.medium``` and ```<count> => 2``` for our test application.
 
@@ -216,11 +217,12 @@ Edit the ```minSize``` and ```maxSize``` both to 0, as we don't want the cluster
 This is done to make sure that the cluster is set-up without any risk of the nodes being deleted when deploying the application and the metrics.
 
 Add a new parameter ```maxPrice:<max-bidding-price>``` above ```maxSize```.  
+
 Set the ```<max-bidding-price>``` as the max price you want to bid for a spot instance.
 
 Set the ```<machine-type>``` to the desired option.
 
-We used ```t3.medium``` for our test application, as obtaining a spot instance of type ```t3.medium``` is relatively easier.
+We used ```t3.medium``` for our test application.
 
 5. Use the kops update command to update the cluster
 ```
@@ -236,10 +238,11 @@ kops validate cluster
 
 #### Follow these steps to deploy the test application Sock-shop
 
-1. Clone the following repository
+1. Clone the Sock shop repository  
+
 ```git clone https://github.com/microservices-demo/microservices-demo.git```
 
-2. Deploy the sock-shop along with prometheus application to your cluster using following commands
+2. Deploy the sock-shop along with prometheus application to your cluster using following commands  
 ```
 cd microservices-demo/deploy/kubernetes/
 kubectl create namespace sock-shop
@@ -248,7 +251,7 @@ kubectl create -f ./deploy/kubernetes/manifests-monitoring
 
 ```
 
-3. Expose the following endpoints 
+3. Expose the deployments  
 ```
 kubectl expose deployment front-end --type=LoadBalancer -n sock-shop --name=front-end-deployment
 
