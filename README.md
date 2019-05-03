@@ -258,3 +258,31 @@ kubectl expose deployment front-end --type=LoadBalancer -n sock-shop --name=fron
 
 kubectl expose deployment prometheus-deployment --type=LoadBalancer -n monitoring --name=prometheus-deployment
 ```
+```
+kubectl get service -n sock-shop
+```
+```
+NAME           TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)          AGE
+carts          ClusterIP      100.70.116.237   <none>                                                                   80/TCP           1d
+carts-db       ClusterIP      100.70.224.159   <none>                                                                   27017/TCP        1d
+catalogue      ClusterIP      100.65.171.188   <none>                                                                   80/TCP           1d
+catalogue-db   ClusterIP      100.65.237.207   <none>                                                                   3306/TCP         1d
+front-end      LoadBalancer   100.64.107.5     a471afe9b6ce911e9b71e02004e2872a-463552420.us-east-1.elb.amazonaws.com   8079:30416/TCP   14h
+orders         ClusterIP      100.65.108.161   <none>                                                                   80/TCP           1d
+orders-db      ClusterIP      100.67.156.105   <none>                                                                   27017/TCP        1d
+payment        ClusterIP      100.69.170.8     <none>                                                                   80/TCP           1d
+queue-master   ClusterIP      100.66.55.164    <none>                                                                   80/TCP           1d
+rabbitmq       ClusterIP      100.70.49.108    <none>                                                                   5672/TCP         1d
+shipping       ClusterIP      100.68.54.197    <none>                                                                   80/TCP           1d
+user           ClusterIP      100.66.202.190   <none>                                                                   80/TCP           1d
+user-db        ClusterIP      100.64.14.164    <none>                                                                   27017/TCP        1d
+```
+```
+kubectl get service -n monitoring
+```
+```
+NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)          AGE
+kube-state-metrics      ClusterIP      100.64.7.247     <none>                                                                    8080/TCP         1d
+prometheus              NodePort       100.68.102.152   <none>                                                                    9090:31090/TCP   1d
+prometheus-deployment   LoadBalancer   100.64.119.122   af1b1f0726c5011e9b71e02004e2872a-1377931422.us-east-1.elb.amazonaws.com   9090:30544/TCP   1d
+```
