@@ -257,6 +257,8 @@ kubectl expose deployment front-end --type=LoadBalancer -n sock-shop --name=fron
 
 kubectl expose deployment prometheus-deployment --type=LoadBalancer -n monitoring --name=prometheus-deployment
 ```
+
+4. Note down the exposed External-IP.  
 ```
 kubectl get service -n sock-shop
 ```
@@ -285,3 +287,6 @@ kube-state-metrics      ClusterIP      100.64.7.247     <none>                  
 prometheus              NodePort       100.68.102.152   <none>                                                                    9090:31090/TCP   1d
 prometheus-deployment   LoadBalancer   100.64.119.122   af1b1f0726c5011e9b71e02004e2872a-1377931422.us-east-1.elb.amazonaws.com   9090:30544/TCP   1d
 ```
+
+View the website using ```http://<sock-shop-external-ip>:8079```.  
+View Prometheus Graphs using ```http://<prometheus-external-ip>:9090```.
