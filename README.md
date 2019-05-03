@@ -67,3 +67,14 @@
 Watch the AWS spot instance events to determine when a node is going away, figure out how to recover from such events with your Kubernetes cluster (Ex: evacuate the existing node and add a new node)
 
 - Release #3: Use an example application (JBoss, Spark, etc.), simulate load, and trigger spot instance events to move the application and maintain SLA
+
+
+
+To run our application you need to install these prerequisites first:  
+ 1.Install kubectl from https://kubernetes.io/docs/tasks/tools/install-kubectl/  
+ 2.Install kops from https://github.com/kubernetes/kops  
+ 3.Install AWS CLI from https://docs.aws.amazon.com/cli/latest/userguide/install-linux-al2017.html  
+ 
+  
+
+ 
