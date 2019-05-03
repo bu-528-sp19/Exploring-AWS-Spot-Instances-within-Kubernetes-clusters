@@ -140,22 +140,16 @@ Watch the AWS spot instance events to determine when a node is going away, figur
 
 ## Step 1: Prerequisite installations
 
-  
+1. [Install kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
-#### To run our application you need to install these prerequisites first:
+2. [Install kops](https://github.com/kubernetes/kops)
 
-1. Install kubectl from [here]([https://kubernetes.io/docs/tasks/tools/install-kubectl/](https://kubernetes.io/docs/tasks/tools/install-kubectl/))
-
-2. Install kops from [here]([https://github.com/kubernetes/kops](https://github.com/kubernetes/kops))
-
-3. Install AWS CLI from [here]([https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html))
+3. [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 
 
-## Step 2: Setting up the kops with aws credentials
+## Step 2: Configure AWS credentials
 
-#### Follow the steps to login and work with AWS
-
-Confingure AWS by following steps from [here]([https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html])
+[Configure AWS](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)
 
 ## Step 3: Setting up the cluster
 
@@ -168,11 +162,12 @@ export KOPS_STATE_STORE=s3://<bucket-name>
 ```
 2. Use the following command to create a cluster
 ```
-kops create cluster <cluster-name> --zones us-east-1a --yes --master-size=<set-machine-type> --node-size=<set-machine-type> --node-count=<count>
+kops create cluster <cluster-name> --zones us-east-1a --yes --master-size=<machine-type> --node-size=<machine-type> --node-count=<count>
 ```
+**Note: ```<cluster-name>.k8s.local``` creates a cluster without DNS.**  
 Set the ```<machine-type>```  and ```<count>``` to the desired option.
 
-We used ```t3.medium``` and ```3``` for our test application.
+We set ```<machine-type> => t3.medium``` and ```<count> => 2``` for our test application.
 
 3. Create a new instance group for Spot Instances
 ```
@@ -198,9 +193,9 @@ spec:
 
   image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
 
-  machineType: <set-machine-type>
+  machineType: <machine-type>
 
-  maxPrice: <set-max-bidding-price>
+  maxPrice: <max-bidding-price>
 
   maxSize: 0
   minSize: 0
@@ -220,9 +215,10 @@ Edit the ```minSize``` and ```maxSize``` both to 0, as we don't want the cluster
 
 This is done to make sure that the cluster is set-up without any risk of the nodes being deleted when deploying the application and the metrics.
 
-Add a new parameter ```maxPrice:<max-bidding-price>``` where you need to mention the max price you are ready to bid for a spot instance.
+Add a new parameter ```maxPrice:<max-bidding-price>``` above ```maxSize```.  
+Set the ```<max-bidding-price>``` as the max price you want to bid for a spot instance.
 
-Set the ```machineType``` to the desired option.
+Set the ```<machine-type>``` to the desired option.
 
 We used ```t3.medium``` for our test application, as obtaining a spot instance of type ```t3.medium``` is relatively easier.
 
