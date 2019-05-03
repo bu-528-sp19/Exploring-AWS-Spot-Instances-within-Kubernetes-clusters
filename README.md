@@ -252,7 +252,7 @@ kubectl create -f ./deploy/kubernetes/manifests-monitoring
 
 ```
 
-3. Expose the following endpoints using the following commands
+3. Expose the following endpoints 
 ```
 kubectl expose deployment front-end --type=LoadBalancer -n sock-shop --name=front-end-deployment
 
