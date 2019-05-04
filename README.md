@@ -47,11 +47,11 @@
 
 	- Maintains the Service Level Agreement (SLA) for the application
 
-**
+
 <p align="center">
 <img src="https://lh6.googleusercontent.com/EsOKlESF_YkQ5rV7xiNm-COTyKvpnuzWd4sBZOuMzjB2YukxieLIbEEEI5h4qsDS5EQs62vqmtFXFoPTUtZLHWFLsmaQdlfsrDsnKkjiOnO-qJzcrdInZpKXRJqHOsYpMjkOQsQubwA" alt="alt text" width="400" height="400">
 
-**
+
 
 ## ****Users****
 
@@ -420,13 +420,13 @@ View Prometheus Graphs using ```http://<prometheus-external-ip>:9090```
 
 [Daniel McPherson](https://github.com/danmcp)
 
-[ravi gudimetla](https://github.com/ravisantoshgudimetla)
+[Ravi Gudimetla](https://github.com/ravisantoshgudimetla)
 
 ## Contributors
 
 [Aditya Kadam](https://github.com/adi6496)
 
-[kevin rodrigues](https://github.com/kevinrodrigues13)
+[Kevin Rodrigues](https://github.com/kevinrodrigues13)
 
 [Nikhil Singh](https://github.com/Nikjz)
 
