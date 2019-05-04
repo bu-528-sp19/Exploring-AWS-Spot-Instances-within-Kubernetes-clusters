@@ -5,7 +5,7 @@
 [![Watch the video](https://img.youtube.com/vi/X1dKqediJmE/maxresdefault.jpg)](https://youtu.be/X1dKqediJmE)
 
 
- Click on the above image to watch our video where we discuss about the whole project
+ Click on the above image to watch our video where we discuss the whole project
 
 ## ****Background****
 
