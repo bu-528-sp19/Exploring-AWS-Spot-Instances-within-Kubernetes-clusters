@@ -7,136 +7,243 @@
 
  Click here to watch our video where we discuss about the whole project
 
-**Background**
+## ****Background****
+
+  
 
 - [Amazon EC2 Spot Instances]([https://aws.amazon.com/ec2/spot/](https://aws.amazon.com/ec2/spot/)  "Amazon EC2 Spot Instances") offer spare compute capacity available in the AWS cloud at steep discounts compared to On-Demand instances. Spot Instances enable you to optimize your costs on the AWS cloud and scale your application's throughput up to 10X for the same budget. The Spot price is determined by temporary trends in supply and demand and the amount of On-Demand capacity on a particular instance size, family, Availability Zone, and AWS Region
+
+  
 
 - [Kubernetes]([https://kubernetes.io/](https://kubernetes.io/)  "Kubernetes") is a portable, extensible open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
 
   
 
-## **1. Vision and goals**
+  
 
-- To provide a cost-effective way of running a Kubernetes cluster using spot instances which are more economical than the default On-Demand instances
-
-- To reduce the cost in such a way that the Service Level Agreement (SLA) is maintained
-
-- To recommend the client an optimal percentage of total Kubernetes clusters to be used as spot instances to reduce the overall cost
-
-- Kubernetes has built-in logic for self-healing which makes it easier and ideal target for the development of such a solution
-
-## **2. Users**
-
-- This will be used by cluster admins and developers using the Kubernetes Cluster and want to optimize their infrastructure cost for various applications or projects
-
-- It does not target non-expert users who are unfamiliar with Kubernetes or AWS
-
-## **3. Scope and features**
-
-- Reads a user-defined config file that defines the parameters of the distribution of Spot Instances and runs the program
-
-- Maintain the SLA for the application while using the Spot Instances
-
-- Able to handle various types of applications like JBoss, Spark, Hadoop, etc.
-
-- Can handle sporadic or any distributed workloads
-
-- Primarily focuses on scaling of EC2 instances
-
-- Can recover from node termination gracefully while maintaining the SLA for all applications
+## ****The Motivation****
 
   
 
-## **4. Input**
+- Developers use On Demand EC2 instances to use with Kubernetes clusters as it is risk free and easier to manage compared to Spot Instances.
 
-- Config file that contains parameters like SLA by the client including the up time of the application and the percentage of the cluster to be used as spot instances
+- But using such On Demand instances results in high costs of running an application.
 
-  
+- Using Amazon’s Elastic Kubernetes Service (EKS) one can manage Spot Instances, but Amazon charges $150 per month for running the control panel in addition to cost of running nodes which host the application.
 
-## **5. Output**
-
-- Stable running application
-
-- Actual costs saved
-
-- Recommended percentage of clusters to optimize cost savings and performance
+- This additional cost can be avoided if you're administering the Kubernetes Cluster.
 
   
 
-## **6. Solution**
+## ****The Solution****
 
-- Kubernetes distrubutes the workload onto the cluster nodes equally, with even load on every node
+- We create a controller which runs in an infinite while loop and sits on top of the Kubernetes.
 
-- Kubernetes is capable of rescheduling workloads when there are issues on infrastructure
+- This controller performs these actions
 
-- The proposed solution looks for ideal combination of On-Demand and Spot Instance nodes for the workload that the cluster is handling
+	- Manages an application that runs on spot instances within a Kubernetes cluster in a cost effective way
 
-- This combination is either pre-decided by the config file provided by the client or by the program we create
+	- Optimizes the number of spot instances dynamically
 
-- The program thus proposed is a controller program that continuously looks for a better state that the application can exist in.
+	- Maintains the Service Level Agreement (SLA) for the application
 
-- This controller:
+**![](https://lh6.googleusercontent.com/EsOKlESF_YkQ5rV7xiNm-COTyKvpnuzWd4sBZOuMzjB2YukxieLIbEEEI5h4qsDS5EQs62vqmtFXFoPTUtZLHWFLsmaQdlfsrDsnKkjiOnO-qJzcrdInZpKXRJqHOsYpMjkOQsQubwA)**
 
-+ Runs constantly maintaining the SLA
-
-+ Looks for available spot instances which are cheaper and can process the workload
-
-+ Can dynamically handle any termination of node, either On-Demand or spot instance
-
-+ Recovers from termination utilizing the cluster autoscaler component of Kubernetes to either evacuate and shift to a new On-demand node or decide to look for another available spot instance
-
-+ May also look for a cheaper spot instance than the current spot instance and decides while considering time required for migration, in order to provide additional cost savings
-
-+ Looks at signals(CPU Usage, Node CPU capacity, Memory usage, Node Memory capacity, Requests, Limits and pod health) from Spot Instances and workloads on Kubernetes to decide when to transfer a load from On-Demand node to Spot Instance node
-
-+ Can handle any type of workload distribution for a variety of applications
-
-- The program will never compromise the working of the application as defined by the SLA in order to reduce the costs. That is, it will not shift the load to a spot instance just for the sake of it.
-
-- The program will also calculate the cost savings that the client makes, and can suggest an optimum percentage of workload to be run on Spot Instances to maximize savings while running no risk of stepping out of line of the SLA
+## ****Users****
 
   
 
-### Proposed System
+- This will be used by cluster admins and developers using the Kubernetes Cluster and want to optimize their infrastructure cost for various applications or projects.
 
-![Proposed System]([https://user-images.githubusercontent.com/20182350/52174269-67e5ca80-275f-11e9-95a4-4e592fee92cc.JPG](https://user-images.githubusercontent.com/20182350/52174269-67e5ca80-275f-11e9-95a4-4e592fee92cc.JPG))
+- It does not target non-expert users who are unfamiliar with Kubernetes or AWS.
+## ****Tools Used****
+#### [Kops]([https://github.com/kubernetes/kops](https://github.com/kubernetes/kops)) (Kubernetes Operations) 
+-   Helps to create, destroy and upgrade clusters from command line
+    
+#### [Prometheus]([https://prometheus.io/](https://prometheus.io/)) (Monitoring tool)
+-   Collects metrics from configured targets at given intervals
+    
+-   Displays the results
+    
 
+#### [Sock-Shop]([https://microservices-demo.github.io/docs/index.html](https://microservices-demo.github.io/docs/index.html)) (Demo Application)
+
+-   The application is the user-facing part of an online shop that sells socks.
+    
+-   It is intended to aid the demonstration and testing of microservices and cloud native technologies.
+
+## **Workflow**
+
+**![](https://lh4.googleusercontent.com/IcNoiCC4YxYVly8smWrcYvX5d8TiUxoqIMBNt-AuovAL1X1Gnzv7A5bvlkdFL3RR3N1PLwYvrbK6d3bqPTtw3VRGe_OnzU8rEfphyXUIGRRXWc5sAWmcZf_NrnjYjWouZauB5r2mdY4)**
+
+- Application is deployed on kubernetes cluster with on demand as and spot instances
+- Prometheus pulls metrics from application
+- Controller takes thresholds as inputs
+- Controller then compares the threshold values with metrics from prometheus and takes decisions
+- These decisions invoke actions that performed through kops on the cluster
+
+## **SLA**
+-   A service level agreement, or SLA, is a common term for formal service commitments that are made to customers by service providers.
+    
+-   The target SLA for our test application (Sock-shop) is set to have availability of 99% (“two nines”)
+    
+-   Availability is defined by these Service Level Indicators (SLIs)
+    
+
+	-   **Throughput**: More than 96%
+    
+	-   **Error Rate**: Less than 4%
+    
+	-   **Latency**: Less than 1.5 seconds
+
+## **Budget**
+-   Budget is the quota which we have in terms of SLA that allows our application to perform below set thresholds.
+    
+-   Budget is increased after a specific time interval.
+    
+-   Anytime our test application performs below a certain threshold, we reduce some amount from the budget
+    
+-   For the test application, we have defined the budget to be 15 mins per day.
+
+## **Algorithm**
+-   Our test application requires minimum 2 nodes to be on demand instances.
+    
+-   Based on network traffic (load) , our algorithm considers three cases
+	1.   High Network Traffic ( more than 600 requests per second )
+    
+	2.   Medium Network Traffic ( between 100 and 600 requests per second )
+    
+	3.   Low Network Traffic ( less than 100 requests per second )
+
+
+### Flowchart of Controller
+
+**![](https://lh4.googleusercontent.com/34-OSES1K_7zYtevjMRKbStTlkkddgOknzLc2JELlZozVg3xcQcK_kW322JUXB2tHfanM3Tngg0bjcyxyBvgxH6AjLtSYDK69glnmdTVp4Cb27LLQbO5309DUBzQQ6T1098cPoJ5P0k)**
+
+
+#### 1. High Network Traffic
+-   If network_traffic > 600:
+    
+
+	-   If application performance is low for 10 mins:
+    
+
+		-   If budget available:
+    
+
+			-   Spin up a Spot instance scale up the application
+    
+
+		-   Else:
+    
+
+			-   Spin up an On demand and scale up the application
+    
+
+	-   Else
+    
+
+		-   Application is running smoothly, do nothing
+#### **2. Moderate Network Traffic**
+-   If 100 < network_traffic < 600:
+	-   If application performance is high for 180 mins:
+		-   If budget available:    
+			-   Scale down
+			-   Delete on demand
+			-   Spin up a spot
+    
+			-   Scale up
+    
+		-   Else:
+    
+			-   Budget not available, do nothing
+
+#### ****3. Low Network Traffic****
+-   If network_traffic < 100:
+    
+
+	-   If application performance stable from 180 mins:
+    
+
+		-   If budget available :
+    
+
+			-   Scale down
+    
+			-   If On demand nodes > 2
+    
+
+				-   Delete an On-Demand Node
+    
+
+			-   Else
+    
+
+				-   Delete Spot instance
+
+### ****Spot Termination****
+- Before we spin up a Spot instance, we have to set a max bidding price.
+
+- Spot Instances can be taken away at any time due to following reasons:
+
+	-   **Price**: The Spot price is greater than your maximum bidding price.
+    
+	-   **Capacity**: If there are not enough unused EC2 instances to meet the demand for Spot Instances, Amazon EC2 interrupts Spot Instances. The order in which the instances are interrupted is determined by Amazon EC2.
+-   Controller constantly checks for ‘to be terminated’ flag of Spot Instances.
+    
+	-   If to_be_terminated = True:
+	    
+
+		-   Scale down the application
+	    
+		-   Drain the spot instance
+		    
+		-   If budget available :
+		    
+
+			-   Spin up a spot instance
+		    
+
+		-   Else
+		    
+
+			-   Spin up an On demand Instance
+
+## ****Input****
   
+Config file that contains these parameters:
+- SLA of the application provided by the client such as the availability of the application
+- External IP of the prometheus deployment
 
-  
 
-## **7. Acceptance criteria**
 
-- Controller can handle a single application with a constant load with 10% of the clusters as spot instances to reduce the effective cost
+## ****Milestones****
 
-  
+- Sprint 1:
+	- Set up the prerequisites (AWS-CLI, kops, Kubectl)
+	- Created a Kubernetes cluster using kops
+	- Mock EC2 spot instances that simulated termination from AWS
+- Sprint 2:
+	- Tested multiple demo applications on minikube
+	- Finalize Sock-shop as the demo application
+- Sprint 3:
+	- Used Jmeter to perform load testing on the application deployed to the cluster
+	- Observed the impact on application due to scaling pods or nodes
+	- Obtained kubernetes metrics using a Go based controller
+- Sprint 4:
+	- Monitored metrics using prometheus
+	- Defined a basic SLA for the application
+	- Created and deleted on demand and spot instances from the Go controller
+- Sprint 5:
+	- Defined the complete SLA for the project with the SLIs
+	- Created the algorithm to make decisions
 
-**Stretch goals**
+## **Cost Savings**
+**![](https://lh4.googleusercontent.com/hj7fvXAeR_dV-26yvbPAV5xTXujmF4W0fMQ_W7NlB3AT2-q1TZHnb3efZFEPfAa3S-EsEaIHneYBsdR8LOvGYXJcz1VeYgrW2EQegshv0PL3Z6UsA8gsW08ePlCVAWfFg_MWlHhxJsA)**
 
-- Dynamically scale the usage of spot instances
-
-- Capable of handling various applications with sporadic workloads
-
-  
-
-## **8. Release planning**
-
-- Release #1:
-
-Create a controller (in GoLang) can call the AWS SDK
-
-- Release #2:
-
-Watch the AWS spot instance events to determine when a node is going away, figure out how to recover from such events with your Kubernetes cluster (Ex: evacuate the existing node and add a new node)
-
-  
-
-- Release #3: Use an example application (JBoss, Spark, etc.), simulate load, and trigger spot instance events to move the application and maintain SLA
-
-  
-
-  
-
+- We started the application with 2 on-demand nodes of type ```t3.medium```
+- We scaled up the cluster using only on-demand nodes in one case, and using only spot instances in the second case.
+- We observed that the savings increased as we increased the number of nodes.
 # Running the application
 
   
@@ -261,10 +368,11 @@ kubectl expose deployment front-end --type=LoadBalancer -n sock-shop --name=fron
 kubectl expose deployment prometheus-deployment --type=LoadBalancer -n monitoring --name=prometheus-deployment
 ```
 
-4. Note down the exposed External-IP.  
+4. Note down the exposed external-ip of the application
 ```
 kubectl get service -n sock-shop
 ```
+You will see an output similar to this example:
 ```
 NAME           TYPE           CLUSTER-IP       EXTERNAL-IP                                                              PORT(S)          AGE
 carts          ClusterIP      100.70.116.237   <none>                                                                   80/TCP           1d
@@ -281,9 +389,11 @@ shipping       ClusterIP      100.68.54.197    <none>                           
 user           ClusterIP      100.66.202.190   <none>                                                                   80/TCP           1d
 user-db        ClusterIP      100.64.14.164    <none>                                                                   27017/TCP        1d
 ```
+5. Note down the exposed external-ip of prometheus 
 ```
 kubectl get service -n monitoring
 ```
+You will see an output similar to this example:
 ```
 NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)          AGE
 kube-state-metrics      ClusterIP      100.64.7.247     <none>                                                                    8080/TCP         1d
@@ -291,5 +401,25 @@ prometheus              NodePort       100.68.102.152   <none>                  
 prometheus-deployment   LoadBalancer   100.64.119.122   af1b1f0726c5011e9b71e02004e2872a-1377931422.us-east-1.elb.amazonaws.com   9090:30544/TCP   1d
 ```
 
-View the website using ```http://<sock-shop-external-ip>:8079```.  
-View Prometheus Graphs using ```http://<prometheus-external-ip>:9090```.
+View the website using ```http://<sock-shop-external-ip>:8079```
+View Prometheus Graphs using ```http://<prometheus-external-ip>:9090```
+
+## Step 5: Running the controller
+
+1. Edit prometheus endpoint in the go program using the external ip of your prometheus deployment
+2. Store the kops scripts inside bin folder of your Go installation.
+3. Run the program
+
+# Members
+
+## Mentorss
+
+[Daniel McPherson](https://github.com/danmcp)
+[ravi gudimetla](https://github.com/ravisantoshgudimetla)
+
+## Contributors
+
+[Aditya Kadam] (https://github.com/adi6496)
+[kevin rodrigues](https://github.com/kevinrodrigues13)
+[Nikhil Singh](https://github.com/Nikjz)
+[Suryateja Gudiguntla](https://github.com/suryatej77)
