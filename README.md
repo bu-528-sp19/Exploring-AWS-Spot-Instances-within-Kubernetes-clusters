@@ -406,6 +406,7 @@ prometheus-deployment   LoadBalancer   100.64.119.122   af1b1f0726c5011e9b71e020
 ```
 
 View the website using ```http://<sock-shop-external-ip>:8079```
+
 View Prometheus Graphs using ```http://<prometheus-external-ip>:9090```
 
 ## Step 5: Running the controller
