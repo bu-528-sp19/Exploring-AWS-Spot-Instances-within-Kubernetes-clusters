@@ -2,7 +2,7 @@
 
 ## **The goal of this project is to explore how we can use spot instances to reduce the cost of running kubernetes clusters.**
 
-  
+ [Click here to watch our video where we discuss about the whole project.]()
 
 **Background**
 
