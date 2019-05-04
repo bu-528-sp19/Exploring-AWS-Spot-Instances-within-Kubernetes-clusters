@@ -248,7 +248,10 @@ Config file that contains these parameters:
 - We started the application with 2 on-demand nodes of type ```t3.medium```
 - We scaled up the cluster using only on-demand nodes in one case, and using only spot instances in the second case.
 - We observed that the savings increased as we increased the number of nodes.
-# Running the application
+
+------------------------------------------------------------------------------------------------------------------------------
+
+# Running the project
 
   
 
