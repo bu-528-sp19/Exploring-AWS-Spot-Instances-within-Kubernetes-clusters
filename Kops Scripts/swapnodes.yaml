@@ -1,0 +1,19 @@
+[?2004h[?1049h[?1h=[?2004h[1;24r[?12h[?12l[27m[29m[m[H[2J[?25l[24;1H"/var/folders/xb/kn9j63v94ygd07f7h22zplvc0000gp/T/kops-edit-muexvyaml" 15L, 311C[1;1HapiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  name: nodes2
+spec:
+  image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
+  machineType: t2.medium
+  maxSize: 2
+  minSize: 2
+  nodeLabels:
+    kops.k8s.io/instancegroup: nodes2
+  role: Node
+  subnets:
+  - us-east-1a
+[94m~                                                                                                                                                                                [17;1H~                                                                                                                                                                                [18;1H~                                                                                                                                                                                [19;1H~                                                                                                                                                                                [20;1H~                                                                                                                                                                                [21;1H~                                                                                                                                                                                [22;1H~                                                                                                                                                                                [23;1H~                                                                                                                                                                                [1;1H[?25h[?25l[m[24;1HType  :qa!  and press <Enter> to abandon all changes and exit Vim[24;66H[K[1;1H[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[24;1H[1m-- SELECT --[m[24;13H[K[1;1H[?25h[?25l[24;4H[1mINSERT[m[1;1HggpiVersion: kops/v1alpha2gg[?25h[?25lgpiVersion: kops/v1alpha2ggg[?25h[24;1H[K[?25l[1;3H[?25h[?25l[24;1HType  :qa!  and press <Enter> to abandon all changes and exit Vim[1;3H[?25h[?25l[?25h[?25l[?25h[?25l[?25h[?25l[?25h[24;1H[?2004l[?2004l[?1l>[?1049lVim: Error reading input, exiting...
+Vim: preserving files...
+Vim: Finished.
+[24;1H
