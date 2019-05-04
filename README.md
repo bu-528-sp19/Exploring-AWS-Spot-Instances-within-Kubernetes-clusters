@@ -420,7 +420,7 @@ View Prometheus Graphs using ```http://<prometheus-external-ip>:9090```
 
 # Members
 
-## Mentorss
+## Mentors
 
 [Daniel McPherson](https://github.com/danmcp)
 
