@@ -47,7 +47,11 @@
 
 	- Maintains the Service Level Agreement (SLA) for the application
 
-**<img src="https://lh6.googleusercontent.com/EsOKlESF_YkQ5rV7xiNm-COTyKvpnuzWd4sBZOuMzjB2YukxieLIbEEEI5h4qsDS5EQs62vqmtFXFoPTUtZLHWFLsmaQdlfsrDsnKkjiOnO-qJzcrdInZpKXRJqHOsYpMjkOQsQubwA" alt="alt text" width="400" height="400" align="center">**
+**
+<p align="center">
+<img src="https://lh6.googleusercontent.com/EsOKlESF_YkQ5rV7xiNm-COTyKvpnuzWd4sBZOuMzjB2YukxieLIbEEEI5h4qsDS5EQs62vqmtFXFoPTUtZLHWFLsmaQdlfsrDsnKkjiOnO-qJzcrdInZpKXRJqHOsYpMjkOQsQubwA" alt="alt text" width="400" height="400">
+<\p>
+**
 
 ## ****Users****
 
