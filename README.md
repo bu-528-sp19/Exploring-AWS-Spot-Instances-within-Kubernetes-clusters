@@ -412,7 +412,7 @@ View Prometheus Graphs using ```http://<prometheus-external-ip>:9090```
 ## Step 5: Running the controller
 
 1. Edit prometheus endpoint in the go program using the external ip of your prometheus deployment
-2. Store the kops scripts inside bin folder of your Go installation.
+2. Store the [kops scripts](https://github.com/bu-528-sp19/Exploring-AWS-Spot-Instances-within-Kubernetes-clusters/tree/master/Kops%20Scripts) inside bin folder of your Go installation.
 3. Run the program
 
 # Members
