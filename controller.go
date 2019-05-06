@@ -2,24 +2,22 @@ package main
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/tidwall/gjson"
 	"io/ioutil"
 	"net/http"
 	"os/exec"
-	"reflect"
 	"sort"
 	"strconv"
 	"time"
 )
 
-func calculateValue(values float64, input_range float64) bool {
-	if values >= input_range {
-		return true
-	} else {
-		return false
-	}
-}
+//func calculateValue(values float64, input_range float64) bool {
+//	if values >= input_range {
+//		return true
+//	} else {
+//		return false
+//	}
+//}
 
 func spot_termination_handler(xs string) bool{
 	if xs == "to be terminated"{
@@ -33,16 +31,16 @@ func spot_termination_handler(xs string) bool{
 func main() {
 
 
-	sess := session.Must(session.NewSessionWithOptions(session.Options{
-		SharedConfigState: session.SharedConfigEnable,
-	}))
-	svc :=  ec2.New(sess)
-	
-	resp, err := svc.DescribeInstances(nil)
-	if err != nil{
-	
-	}
-	fmt.Println(resp.Reservations)
+	//sess := session.Must(session.NewSessionWithOptions(session.Options{
+	//	SharedConfigState: session.SharedConfigEnable,
+	//}))
+	//svc :=  ec2.New(sess)
+	//
+	//resp, err := svc.DescribeInstances(nil)
+	//if err != nil{
+	//
+	//}
+	//fmt.Println(resp.Reservations)
 	var array1 []string = nil
 	var start_nodes int = 2
 	var spot_nodes int = 1
@@ -130,42 +128,42 @@ func main() {
 		error_rate = (error_rate / network_traffic) * 100
 		fmt.Println("Percent Error Rate:", error_rate)
 
-		//Uptime
-		resp1, err := http.Get("http://a149d30fb616a11e9939402df7919f80-1474100923.us-east-1.elb.amazonaws.com:9090/api/v1/query?query=sum(request_duration_seconds_sum{status_code='200'})")
-		reqBody1, err := ioutil.ReadAll(resp1.Body)
-		if err != nil {
-			//
-		}
-		value1 := gjson.Get(string(reqBody1), "data.result.#.value.1")
-		var x1 int = len(value1.String())
-		uptime, err := strconv.ParseFloat(value1.String()[2:x1-2], 64)
-		
-		
-		// Downtime
-		resp2, err := http.Get("http://a149d30fb616a11e9939402df7919f80-1474100923.us-east-1.elb.amazonaws.com:9090/api/v1/query?query=sum(request_duration_seconds_sum{status_code='500'})")
-		reqBody2, err := ioutil.ReadAll(resp2.Body)
-		if err != nil {
-			//
-		}
-		value2 := gjson.Get(string(reqBody2), "data.result.#.value.1")
-		var x int = len(value2.String())
-		downtime, err := strconv.ParseFloat(value2.String()[2:x-2], 64)
-		fmt.Println("%Uptime:", uptime/(uptime+downtime)*100)
+		// Uptime
+		//resp1, err := http.Get("http://a149d30fb616a11e9939402df7919f80-1474100923.us-east-1.elb.amazonaws.com:9090/api/v1/query?query=sum(request_duration_seconds_sum{status_code='200'})")
+		//reqBody1, err := ioutil.ReadAll(resp1.Body)
+		//if err != nil {
+		//	//
+		//}
+		//value1 := gjson.Get(string(reqBody1), "data.result.#.value.1")
+		//var x1 int = len(value1.String())
+		//uptime, err := strconv.ParseFloat(value1.String()[2:x1-2], 64)
+		//
+		//
+		//// Downtime
+		//resp2, err := http.Get("http://a149d30fb616a11e9939402df7919f80-1474100923.us-east-1.elb.amazonaws.com:9090/api/v1/query?query=sum(request_duration_seconds_sum{status_code='500'})")
+		//reqBody2, err := ioutil.ReadAll(resp2.Body)
+		//if err != nil {
+		//	//
+		//}
+		//value2 := gjson.Get(string(reqBody2), "data.result.#.value.1")
+		//var x int = len(value2.String())
+		//downtime, err := strconv.ParseFloat(value2.String()[2:x-2], 64)
+		//fmt.Println("%Uptime:", uptime/(uptime+downtime)*100)
 
-		var input_traffic float64 = 700
-		var input_throughput float64 = 350.00               // User defined node load of each of the requests (SLO)
+		//var input_traffic float64 = 700
+		//var input_throughput float64 = 350.00               // User defined node load of each of the requests (SLO)
 		var input_latency float64 = 1.5 // User defined response time of each of the requests (SLO)
 		var input_errorrate float64 = 0.5
 
-		var result_latency= true
-		var result_throughput= true
-		current_time := strconv.FormatInt(int64(time.Now().Unix()), 10)
-		result_latency = calculateValue(throughput, input_throughput) // To check if aggregated node load lies between the input provided by user
-		result_throughput = calculateValue(input_latency, latency)        // To check if aggregated response time lies between the input provided by user
+		//var result_latency= true
+		//var result_throughput= true
+		//current_time := strconv.FormatInt(int64(time.Now().Unix()), 10)
+		//result_latency = calculateValue(throughput, input_throughput) // To check if aggregated node load lies between the input provided by user
+		//result_throughput = calculateValue(input_latency, latency)        // To check if aggregated response time lies between the input provided by user
 
-		if time_passed == 300{
-			budget += 20
-		}
+		//if time_passed == 300{
+		//	budget += 20
+		//}
 
 		if latency > input_latency || error_rate > input_errorrate { // Maintaining logs using True and False
 			TimeStamp[time_passed] = "false"
@@ -319,39 +317,39 @@ func main() {
 			//fmt.Println("j", j)
 			//fmt.Println("false", mod_load_false)
 			//fmt.Println("true", mod_load_true)
-			if k == 240 {
-				if mod_load_true > 200 {
-					if budget > 10 {
-						if start_nodes > 2 {
-							fmt.Println("Budget available so swap on demand with a spot instance")
-							exec.Command("kubectl", "scale", "deployments", "--all", "-n", "sock-shop", "--replicas=2").Output()
-							time.Sleep(time.Duration(30) * time.Second)
-							fmt.Println("Scaled down")
-							exec.Command("/bin/sh", "nodesubtraction.sh").Output()
-							start_nodes -= 1
-							time.Sleep(time.Duration(200) * time.Second)
-							fmt.Println("Node subtarcted")
-							exec.Command("/bin/sh", "addspot.sh").Output()
-							time.Sleep(time.Duration(300) * time.Second)
-							fmt.Println("Added spot")
-							spot_nodes += 1
-							exec.Command("kubectl", "scale", "deployments", "--all", "-n", "sock-shop", "--replicas=3").Output()
-							time.Sleep(time.Duration(30) * time.Second)
-							fmt.Println("Scaled up")
-							budget = budget - 10
-							fmt.Println("Budget:", budget)
-							fmt.Println("Number of Spot nodes:", spot_nodes)
-							fmt.Println("Number of On demand:", start_nodes)
+				if k == 240 {
+					if mod_load_true > 200 {
+						if budget > 10 {
+							if start_nodes > 2 {
+								fmt.Println("Budget available so swap on demand with a spot instance")
+								exec.Command("kubectl", "scale", "deployments", "--all", "-n", "sock-shop", "--replicas=2").Output()
+								time.Sleep(time.Duration(30) * time.Second)
+								fmt.Println("Scaled down")
+								exec.Command("/bin/sh", "nodesubtraction.sh").Output()
+								start_nodes -= 1
+								time.Sleep(time.Duration(200) * time.Second)
+								fmt.Println("Node subtarcted")
+								exec.Command("/bin/sh", "addspot.sh").Output()
+								time.Sleep(time.Duration(300) * time.Second)
+								fmt.Println("Added spot")
+								spot_nodes += 1
+								exec.Command("kubectl", "scale", "deployments", "--all", "-n", "sock-shop", "--replicas=3").Output()
+								time.Sleep(time.Duration(30) * time.Second)
+								fmt.Println("Scaled up")
+								budget = budget - 10
+								fmt.Println("Budget:", budget)
+								fmt.Println("Number of Spot nodes:", spot_nodes)
+								fmt.Println("Number of On demand:", start_nodes)
+							}
+						} else {
+							fmt.Println("Budget not available so dont do anything")
 						}
-					} else {
-						fmt.Println("Budget not available so dont do anything")
 					}
-				}
 				j=0
-			}else if act_time == 60{
-				fmt.Println("Scale down the application , Add on demand node and scale up")
+				}else if act_time == 60{
+					fmt.Println("Scale down the application , Add on demand node and scale up")
+				}
 			}
-		}
 
 		if time_passed == 210{
 			total_cost_on_demand := float64(time_passed) * on_demand_price * 3/3600
@@ -361,21 +359,21 @@ func main() {
 			fmt.Println("% Cost saved = ",(total_cost_on_demand-total_cost_on_spot)/total_cost_on_demand)
 		}
 
-		if count_false > 5{                                // Adding new nodes
-			//out1,err1 := exec.Command("cd","nodeaddition.sh").Output()
-			//out2,err2 := exec.Command("cd","nodeaddition.sh").Output()
-			//out3,err3 := exec.Command("cd","nodeaddition.sh").Output()
-			out,err := exec.Command("/bin/sh","nodeaddition.sh").Output()
-		
-			if err != nil {
-				//error := string(err[:])
-				fmt.Println("The type of err",reflect.TypeOf(err))
-				fmt.Println("error %s", err)
-			}
-			output := string(out[:])
-			fmt.Printf(output)
-		
-		}
+		//if count_false > 5{                                // Adding new nodes
+		//	//out1,err1 := exec.Command("cd","nodeaddition.sh").Output()
+		//	//out2,err2 := exec.Command("cd","nodeaddition.sh").Output()
+		//	//out3,err3 := exec.Command("cd","nodeaddition.sh").Output()
+		//	out,err := exec.Command("/bin/sh","nodeaddition.sh").Output()
+		//
+		//	if err != nil {
+		//		//error := string(err[:])
+		//		fmt.Println("The type of err",reflect.TypeOf(err))
+		//		fmt.Println("error %s", err)
+		//	}
+		//	output := string(out[:])
+		//	fmt.Printf(output)
+		//
+		//}
 
 
 		fmt.Println("---------------------------------------------------------------------------")
@@ -384,7 +382,7 @@ func main() {
 
 
 
-		
+		/*
 		// ------------------------------------------------------------------------------------------------------------
 		current_time := strconv.FormatInt(int64(time.Now().Unix()), 10)
 		var input_node_load float64 = 8.0               // User defined node load of each of the requests (SLO)
@@ -407,7 +405,7 @@ func main() {
 		} else {
 			TimeStamp.Set(current_time, true)
 		}
-		
+		*/
 
 	}
 
